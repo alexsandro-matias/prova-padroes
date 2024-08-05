@@ -1,29 +1,25 @@
 package snake.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import javax.swing.JPanel;
-import javax.swing.Timer;
 import snake.difficulty.Difficulty;
 import snake.model.Cell;
 import snake.model.Direction;
 import snake.model.SnakeGame;
 import snake.model.State;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class GamePanel extends JPanel {
 
     public static final int SCREEN_WIDTH = 420;
-    private static final int SCREEN_HEIGHT = 420;
     public static final int UNIT_SIZE = 15;
+    private static final int SCREEN_HEIGHT = 420;
     private Timer timer;
     private StatusBar statusBar;
     private SnakeGame game;
@@ -104,10 +100,10 @@ public class GamePanel extends JPanel {
     private class MyKeyAdapter extends KeyAdapter {
 
         Map<Integer, Direction> map = Stream.of(new Object[][]{
-            {KeyEvent.VK_LEFT, Direction.LEFT},
-            {KeyEvent.VK_RIGHT, Direction.RIGHT},
-            {KeyEvent.VK_UP, Direction.UP},
-            {KeyEvent.VK_DOWN, Direction.DOWN}
+                {KeyEvent.VK_LEFT, Direction.LEFT},
+                {KeyEvent.VK_RIGHT, Direction.RIGHT},
+                {KeyEvent.VK_UP, Direction.UP},
+                {KeyEvent.VK_DOWN, Direction.DOWN}
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> (Direction) data[1]));
 
         @Override

@@ -52,6 +52,18 @@ public class GameFrame extends JFrame {
         menuExit.addActionListener(al -> System.exit(0));
         menuOptions.add(menuExit);
 
+        // início da resposta
+        JMenuItem selecioneDirecao = new JMenuItem("Selecione Teclas");
+        menuOptions.add(selecioneDirecao);
+        //adicionando um atalho ou Hotkey
+        selecioneDirecao.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.CTRL_DOWN_MASK));
+        // setando as teclas
+        selecioneDirecao.addActionListener(al -> panel.setDifficulty(new Beginner()));
+
+
+
+
+
         StatusBar statusBar = new StatusBar();
         getContentPane().add(statusBar, java.awt.BorderLayout.SOUTH);
         panel.setStatusBar(statusBar);
