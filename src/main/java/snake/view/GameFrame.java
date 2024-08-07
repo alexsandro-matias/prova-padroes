@@ -1,23 +1,31 @@
 package snake.view;
 
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
-
 import snake.difficulty.Advanced;
 import snake.difficulty.Beginner;
 import snake.difficulty.Intermediate;
+import snake.view.direcoes.JoystickApp;
+import snake.view.direcoes.KeyBindingManager;
+import snake.view.direcoes.KeyBindingPanel;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 public class GameFrame extends JFrame {
 
+    private static void actionPerformed(ActionEvent al) {
+        new JoystickApp();
+    }
+
+    public static void main(String[] args) {
+        GameFrame gf = new GameFrame();
+        gf.start();
+    }
+
     public void start() {
         GamePanel panel = new GamePanel();
-        panel.start();
         this.setTitle("Snake");
         this.add(panel);
         this.setResizable(false);
@@ -58,21 +66,34 @@ public class GameFrame extends JFrame {
         //adicionando um atalho ou Hotkey
         selecioneDirecao.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.CTRL_DOWN_MASK));
         // setando as teclas
-        selecioneDirecao.addActionListener(al -> panel.setDifficulty(new Beginner()));
+//        selecioneDirecao.addActionListener(al -> panel.setDifficulty(new Beginner()));
+
+        selecioneDirecao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Cria a nova janela
+                JFrame janela = new JFrame("Selecione as teclas");
+                janela.setSize(300, 200);
+                janela.setVisible(true);
 
 
 
+//
+                KeyBindingManager keyBindingManager = new KeyBindingManager();
+                KeyBindingPanel keyBindingPanel = new KeyBindingPanel(keyBindingManager);
+
+                janela.add(keyBindingPanel);
+                janela.setVisible(true);
+                janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            }
+        });
 
 
         StatusBar statusBar = new StatusBar();
         getContentPane().add(statusBar, java.awt.BorderLayout.SOUTH);
         panel.setStatusBar(statusBar);
-        
-        this.pack();
-    }
 
-    public static void main(String[] args) {
-        GameFrame gf = new GameFrame();
-        gf.start();
+        this.pack();
     }
 }

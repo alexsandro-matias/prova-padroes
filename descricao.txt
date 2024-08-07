@@ -3,6 +3,8 @@ se arrasta pela tela, coletando comida, não podendo colidir com seu próprio co
 que cercam a área de jogo. Cada vez que a serpente come um pedaço de comida, sua cauda cresce,
 aumentando a dificuldade do jogo. O usuário controla a direção da cabeça da serpente (para cima,
 para baixo, esquerda e direita) clicando nas setas.
+
+
 O objetivo é permitir ao usuário escolher as teclas que quer associar às direções da cobra. Criar
 um item a mais no menu do jogo para permitir essa associação. Utilizar um padrão de projeto
 para permitir ao usuário associar as teclas desejadas para a movimentação da cobra.

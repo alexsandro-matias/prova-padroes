@@ -6,11 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class KeyBindingPanel extends JPanel {
-    private KeyBindingManager keyBindingManager;
-    private JTextField upField;
-    private JTextField downField;
-    private JTextField leftField;
-    private JTextField rightField;
+    private final KeyBindingManager keyBindingManager;
+    private final JTextField upField;
+    private final JTextField downField;
+    private final JTextField leftField;
+    private final JTextField rightField;
 
     public KeyBindingPanel(KeyBindingManager keyBindingManager) {
         this.keyBindingManager = keyBindingManager;

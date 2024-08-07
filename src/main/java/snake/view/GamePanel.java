@@ -5,6 +5,9 @@ import snake.model.Cell;
 import snake.model.Direction;
 import snake.model.SnakeGame;
 import snake.model.State;
+import snake.strategy.DirecoesStrategy;
+import snake.strategy.MapaTeclasCustomizadas;
+import snake.strategy.MapasTeclasPadrao;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,13 +26,32 @@ public class GamePanel extends JPanel {
     private Timer timer;
     private StatusBar statusBar;
     private SnakeGame game;
+    private DirecoesStrategy estrategiaTeclas;
 
-    public void start() {
+    public GamePanel() {
+        preparacaoJanela();
+        estrategiaTeclas = new MapaTeclasCustomizadas(game) ;
+//        estrategiaTeclas = new MapasTeclasPadrao(game);
+        setEstrategiaTeclas(this.estrategiaTeclas);
+
+
+    }
+
+    public void setEstrategiaTeclas(DirecoesStrategy estrategiaTeclas) {
+        this.removeKeyListener(this.estrategiaTeclas);
+        this.estrategiaTeclas = estrategiaTeclas;
+        this.addKeyListener(estrategiaTeclas);
+
+    }
+
+    public void preparacaoJanela() {
         game = new SnakeGame(SCREEN_WIDTH / UNIT_SIZE, SCREEN_HEIGHT / UNIT_SIZE);
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
-        this.addKeyListener(new MyKeyAdapter());
+
+
+        this.addKeyListener(this.estrategiaTeclas);
         timer = new Timer(game.getDiff().getDelay(), ae -> repaint());
     }
 
@@ -96,6 +118,7 @@ public class GamePanel extends JPanel {
         int i = s.lastIndexOf(".");
         statusBar.setMessage(game.getFruitConsumed(), s.substring(i + 1), timer.getDelay());
     }
+
 
     private class MyKeyAdapter extends KeyAdapter {
 
